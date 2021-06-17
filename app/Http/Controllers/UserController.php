@@ -12,9 +12,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index(Request $data)
+    {  $name = $data->name;//form  filed name
+    	$email = $data->email;
+    	$password = $data->password;
+        $products=$data->product;
+
+    	$obj = new user;
+
+    	$obj->name = $name;//database  field name
+        $obj->products =$products;
+    	$obj->email = $email;
+    	$obj->password = $password;
+    
+
+    	if($obj->save())
+    	{
+    		// return redirect('index',[$name]);
+            return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
+
+    	}
+    	else
+    	{
+    		echo "data not insrted";
+    	}
+
+        //  return view('temp')->with(['name'=>$name]);
     }
 
     /**
@@ -22,9 +45,30 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $data)
     {
-        //
+        
+        // $name = $data->name;//form  filed name
+    	// $email = $data->email;
+    	// $password = $data->password;
+        // $products=$data->product;
+
+    	// $obj = new user;
+
+    	// $obj->name = $name;//database  field name
+        // $obj->products =$products;
+    	// $obj->email = $email;
+    	// $obj->password = $password;
+    
+
+    	// if($obj->save())
+    	// {
+    	// 	return redirect('index',[$name]);
+    	// }
+    	// else
+    	// {
+    	// 	echo "data not insrted";
+    	// }
     }
 
     /**
@@ -35,7 +79,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -46,7 +90,7 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        //
+        
     }
 
     /**

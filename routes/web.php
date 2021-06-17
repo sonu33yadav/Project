@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\mailcontroller;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sineup');    
 });
+    
+// Route::post('/create',[UserController::class,'create']);
+Route::post('/index',[UserController::class,'index']);
+Route::get('/email',[mailcontroller::class,'attachment_email']);
+
