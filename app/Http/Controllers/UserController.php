@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Mail;
+use PDF;
 use App\Models\user;
 use Illuminate\Http\Request;
 
@@ -16,19 +17,17 @@ class UserController extends Controller
     {  $name = $data->name;//form  filed name
     	$email = $data->email;
     	$password = $data->password;
-        $products=$data->product;
+        $products=$data->products;
 
     	$obj = new user;
 
     	$obj->name = $name;//database  field name
-        $obj->products =$products;
     	$obj->email = $email;
     	$obj->password = $password;
-    
+        $obj->products =$products;
 
     	if($obj->save())
     	{
-    		// return redirect('index',[$name]);
 
              $data = array('name'=>$name, 'email'=>$email, 'products'=>$products);
              
@@ -38,7 +37,10 @@ class UserController extends Controller
                  $message->to($email)->cc('sk1533884@gmail.com')->subject('This is form Test side');
                 //  $message->attach('\Project\resource\views\temp.blade.php');
             });
-            return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
+
+            //  $pdf = PDF::loadView('temp',compact('name','products'));
+            // download PDF file with download method
+            return view('temp')->with(['name'=>$name])->with(['products'=>$products]); 
             // echo "Email Sent with attachment. Check your inbox.";
          }
 

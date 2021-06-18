@@ -22,5 +22,5 @@ Route::get('/', function () {
     
 // Route::post('/create',[UserController::class,'create']);
 Route::post('/index',[UserController::class,'index']);
-Route::get('/email',[mailcontroller::class,'attachment_email']);
+
 
