@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Mail;
 use App\Models\user;
 use Illuminate\Http\Request;
 
@@ -29,9 +29,20 @@ class UserController extends Controller
     	if($obj->save())
     	{
     		// return redirect('index',[$name]);
-            return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
 
-    	}
+             $data = array('name'=>$name, 'email'=>$email, 'products'=>$products);
+             
+            Mail::send('temp', $data, function ($message) use ($name,$products,$email) {
+                 $message->from('sk1533884@gmail.com',$name);
+            
+                 $message->to($email)->cc('sk1533884@gmail.com')->subject('This is form Test side');
+                //  $message->attach('\Project\resource\views\temp.blade.php');
+            });
+            return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
+            // echo "Email Sent with attachment. Check your inbox.";
+         }
+
+    	
     	else
     	{
     		echo "data not insrted";
