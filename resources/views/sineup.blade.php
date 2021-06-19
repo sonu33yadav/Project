@@ -84,8 +84,8 @@ button:hover {
     <label for="name"><b>Name</b></label>
     <input type="text" placeholder="Enter Name" name="name" required>
 
-    <label for="product"><b>Product</b></label>
-    <input type="text" placeholder="Enter your product" name="products" required>
+    <label for="products"><b>Product</b></label>
+    <input type="text" placeholder="Enter your product" value="{{$name}}"  name="products" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>

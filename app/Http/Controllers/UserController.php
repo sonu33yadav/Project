@@ -38,9 +38,11 @@ class UserController extends Controller
                 //  $message->attach('\Project\resource\views\temp.blade.php');
             });
 
-            //  $pdf = PDF::loadView('temp',compact('name','products'));
+             $pdf = PDF::loadView('temp',compact('name','products'));
             // download PDF file with download method
-            return view('temp')->with(['name'=>$name])->with(['products'=>$products]); 
+            return $pdf->download('temp.pdf'); 
+            return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
+            // return $pdf->download('temp.pdf'); 
             // echo "Email Sent with attachment. Check your inbox.";
          }
 
@@ -60,39 +62,8 @@ class UserController extends Controller
      */
     public function create(Request $data)
     {
-        
-        // $name = $data->name;//form  filed name
-    	// $email = $data->email;
-    	// $password = $data->password;
-        // $products=$data->product;
-
-    	// $obj = new user;
-
-    	// $obj->name = $name;//database  field name
-        // $obj->products =$products;
-    	// $obj->email = $email;
-    	// $obj->password = $password;
     
-
-    	// if($obj->save())
-    	// {
-    	// 	return redirect('index',[$name]);
-    	// }
-    	// else
-    	// {
-    	// 	echo "data not insrted";
-    	// }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
+     return view('sineup')->with(['name'=>$name]);   
     }
 
     /**

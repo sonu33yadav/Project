@@ -17,10 +17,10 @@ use App\Http\Controllers\mailcontroller;
 */
 
 Route::get('/', function () {
-    return view('sineup');    
+    return view('product');    
 });
     
-// Route::post('/create',[UserController::class,'create']);
+Route::get('/create',[UserController::class,'create']);
 Route::post('/index',[UserController::class,'index']);
 
 
