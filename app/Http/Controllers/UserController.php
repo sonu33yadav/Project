@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Mail;
 use PDF;
+use App\Models\products;
 use App\Models\user;
 use Illuminate\Http\Request;
 
@@ -32,15 +33,15 @@ class UserController extends Controller
              $data = array('name'=>$name, 'email'=>$email, 'products'=>$products);
              
             Mail::send('temp', $data, function ($message) use ($name,$products,$email) {
-                 $message->from('sk1533884@gmail.com',$name);
+                 $message->from('adarshyadaviitr@gmail.com','Sonu Kumar');
             
-                 $message->to($email)->cc('sk1533884@gmail.com')->subject('This is form Test side');
+                 $message->to($email)->cc('sk1533884@gmail.com')->subject('Product conformation');
                 //  $message->attach('\Project\resource\views\temp.blade.php');
             });
 
-             $pdf = PDF::loadView('temp',compact('name','products'));
+            //  $pdf = PDF::loadView('temp',compact('name','products'));
             // download PDF file with download method
-            return $pdf->download('temp.pdf'); 
+            // return $pdf->download('temp.pdf'); 
             return view('temp')->with(['name'=>$name])->with(['products'=>$products]);
             // return $pdf->download('temp.pdf'); 
             // echo "Email Sent with attachment. Check your inbox.";
@@ -60,10 +61,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $data)
+    public function create()
     {
-    
-     return view('sineup')->with(['name'=>$name]);   
+     
+    //  print_r($data);die;
+     return view('sineup');   
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Session;
 use App\Models\products;
 use Illuminate\Http\Request;
 
@@ -12,9 +12,9 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function products()
     {
-        //
+        return view('addproduct');
     }
 
     /**
@@ -22,9 +22,63 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addproducts(Request $data)
     {
-        //
+        // print_r($data);die;
+        $file= $data->file('image');
+
+           if(!empty($file))
+               {
+               $obj= new products ;
+               $name = $data->name;
+               $products = $data->products;
+               $products_detail = $data->products_detail;
+               $file= $data->file('image');
+               $ext = $file->getClientOriginalExtension();
+               $new_image=rand().".".$ext;
+               $path= public_path("/assets/images/");
+               
+               if($file->move($path,$new_image))
+               {
+                   $obj->name = $name;
+                   $obj->products = $products;
+                   $obj->products_detail = $products_detail;
+                   $obj->image = $new_image;
+
+                   if($obj->save())
+                   {
+                       # echo "data inserted";
+                       Session::flash('message', 'Successfully Added!');
+                       return  redirect('show/');
+                   }
+
+                   }
+               else
+               {
+                    #echo "invalid data";
+                   Session::flash('message', 'Invalid data');
+               }
+           }
+           else
+           {
+                 $obj= new products;
+	               $name = $data->name;
+	               $products = $data->products;
+	               $products_detail = $data->products_detail;
+
+	               $obj->name = $name;
+                 $obj->products = $products;
+                 $obj->products_detail = $products_detail;
+
+                 if($obj->save())
+                 {
+                      #echo "data inserted";
+                      Session::flash('message', 'Successfully Added!');
+                     return redirect('show/');
+                 }
+
+           }
+
     }
 
     /**
@@ -44,9 +98,10 @@ class ProductsController extends Controller
      * @param  \App\Models\products  $products
      * @return \Illuminate\Http\Response
      */
-    public function show(products $products)
+    public function show()
     {
-        //
+        $data = products::get();
+        return view('product',compact('data'));
     }
 
     /**

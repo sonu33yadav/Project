@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\mailcontroller;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\EmailController;
+
 
 
 /*
@@ -22,5 +24,8 @@ Route::get('/', function () {
     
 Route::get('/create',[UserController::class,'create']);
 Route::post('/index',[UserController::class,'index']);
+Route::get('/products',[ProductsController::class,'products']);
+Route::post('/addproducts',[ProductsController::class,'addproducts']);
+Route::get('/show',[ProductsController::class,'show']);
 
 

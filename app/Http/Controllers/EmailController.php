@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\email;
+use App\Models\products;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
@@ -12,9 +13,10 @@ class EmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function addmeterial()
     {
-        //
+        $data = products::get();
+        print_r($data);die;   
     }
 
     /**
